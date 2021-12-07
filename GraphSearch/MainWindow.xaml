@@ -13,9 +13,7 @@
             <RowDefinition Height="159*"/>
             <RowDefinition Height="334*"/>
         </Grid.RowDefinitions>
-        <Button Content="Button" HorizontalAlignment="Left" Margin="717,178.436,0,0" VerticalAlignment="Top" Width="97" Height="43" Grid.Row="1"/>
-        <Button Content="Button" HorizontalAlignment="Left" VerticalAlignment="Top" Width="97" Margin="774,294.436,0,0" Height="30" Grid.Row="1"/>
-        <Canvas x:Name="canvas" Height="295" Margin="10,10,-0.2,0" VerticalAlignment="Top" MouseLeftButtonDown="Canvas_MouseDown" Background="Transparent" Grid.RowSpan="2" HorizontalAlignment="Left" Width="871" />
+        <Canvas x:Name="canvas" Height="473" Margin="10,10,-0.2,0" VerticalAlignment="Top" MouseLeftButtonDown="Canvas_MouseDown" Background="Transparent" Grid.RowSpan="2" HorizontalAlignment="Left" Width="871" />
         
     </Grid>
 </Window>

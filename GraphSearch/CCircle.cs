@@ -8,11 +8,11 @@ namespace GraphSearch
 {
     public class CCircle
     {
-        public double X, Y;
+        private double X, Y;
         private int Radius = 50;
         public bool Selected { get; private set; }
 
-        public Ellipse e;
+        private Ellipse e;
 
         public CCircle(double x, double y)
         {
@@ -44,7 +44,6 @@ namespace GraphSearch
                 e.Stroke = Brushes.Red;
             else
                 e.Stroke = Brushes.Black;            
-            canvas.InvalidateVisual();
         }
 
         public void Remove(Canvas canvas)

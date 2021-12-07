@@ -1,15 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Shapes;
 
 namespace GraphSearch
 {
     public partial class MainWindow : Window
     {
+        
         public List<CCircle> circles;
         public MainWindow()
         {
@@ -35,8 +32,8 @@ namespace GraphSearch
             Point pt = e.GetPosition(this);
             UncheckAll();
             var Vertex = new CCircle(e.GetPosition(this).X, e.GetPosition(this).Y);
-            circles.Add(Vertex);
-            Vertex.Paint(canvas);  
+            Vertex.Paint(canvas);
+            circles.Add(Vertex); 
         }
 
        
@@ -46,16 +43,6 @@ namespace GraphSearch
             {
                 UnselectCircle(c);
             }
-        }
-        void SelectCircle(CCircle circle)
-        {
-            circle.Select();
-            circle.Paint(canvas);
-        }
-        void UnselectCircle(CCircle circle)
-        {
-            circle.Unselect();
-            circle.Paint(canvas);
         }
 
         private void Window_KeyDown(object sender, KeyEventArgs e)
@@ -78,6 +65,15 @@ namespace GraphSearch
                 }
             }
         }
-
+        void SelectCircle(CCircle circle)
+        {
+            circle.Select();
+            circle.Paint(canvas);
+        }
+        void UnselectCircle(CCircle circle)
+        {
+            circle.Unselect();
+            circle.Paint(canvas);
+        }
     }
 }
