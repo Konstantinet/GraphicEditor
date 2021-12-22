@@ -22,16 +22,23 @@ namespace GraphSearch
                 return false;
         }
 
-        public override bool IsOutOfBounds()
+        public override bool IsOutOfBounds(double dx, double dy)
         {
-            if (((X + Radius) > (canvas.ActualWidth)) || ((Y + Radius) > canvas.ActualHeight) || (X < (0 + Radius)) || (Y < (0 + Radius)))
+            if (((X+dx + Radius) > (canvas.ActualWidth)) || ((Y+dy + Radius) > canvas.ActualHeight) || (X+dx < (0 + Radius)) || (Y+dy < (0 + Radius)))
                 return true;
             return false;
         }
-
+        public override void Move(double dx, double dy)
+        {
+            if (!IsOutOfBounds(dx,dy))
+            {
+                X = X + dx;
+                Y = Y + dy;
+            }
+            Paint();
+        }
         public override int GetSize() => Radius;
         public override void SetSize(int size) { Radius = size; Paint(); }
-
         public override void Paint()
         {
             if (drawing == null)

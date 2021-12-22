@@ -56,10 +56,12 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Circle.cs" />
-    <Compile Include="Ellipse.cs" />
-    <Compile Include="Shape.cs" />
-    <Compile Include="Sqare.cs" />
+    <Compile Include="Model\Circle.cs" />
+    <Compile Include="Model\Ellipse.cs" />
+    <Compile Include="Model\IShape.cs" />
+    <Compile Include="Model\Shape.cs" />
+    <Compile Include="Model\ShapeGroup.cs" />
+    <Compile Include="Model\Sqare.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

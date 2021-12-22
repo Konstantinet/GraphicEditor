@@ -7,19 +7,18 @@ using System.Windows.Media;
 using System.Windows.Shapes;
 using UniStorage;
 using System.Windows.Controls.Primitives;
+using GraphSearch.Model;
 
 namespace GraphSearch
 {
     public partial class MainWindow : Window
     {
-        public UniversalStoradge<Shape> shapes;
+        public UniversalStoradge<IShape> shapes;
         public MainWindow()
         {
             InitializeComponent();
-            shapes = new UniversalStoradge<Shape>();  
+            shapes = new UniversalStoradge<IShape>();  
         }
-
-
         private void Canvas_MouseDown(object sender, MouseButtonEventArgs e)
         {
             foreach(var s in shapes)
@@ -32,12 +31,15 @@ namespace GraphSearch
                             c.Unselect();
                     }
 
-                    foreach (ComboBoxItem i in ColorBox.Items)
+                    if (s is Shape)
                     {
-                        if (s.GetColor().Equals( ((((i.Content as StackPanel).Children[0] as System.Windows.Shapes.Rectangle).Fill as SolidColorBrush).Color)))
-                        ColorBox.SelectedItem = i;
+                        foreach (ComboBoxItem i in ColorBox.Items)
+                        {
+                            if ((s as Shape).GetColor().Equals(((((i.Content as StackPanel).Children[0] as System.Windows.Shapes.Rectangle).Fill as SolidColorBrush).Color)))
+                                ColorBox.SelectedItem = i;
+                        }
+                        SizeSlider.Value = (s as Shape).GetSize();
                     }
-                    SizeSlider.Value = s.GetSize();
                     s.Select();
                     e.Handled = true;
                     return;
@@ -60,7 +62,6 @@ namespace GraphSearch
                 as SolidColorBrush).Color);
             shapes.AddElement(shape); 
         }
-
         private void Window_KeyDown(object sender, KeyEventArgs e)
         {
             if(e.Key == Key.Escape)
@@ -75,7 +76,7 @@ namespace GraphSearch
             }
             if(e.Key == Key.Delete)
             {
-                List<Shape> deleted = new List<Shape>();
+                List<IShape> deleted = new List<IShape>();
                 foreach(var c in shapes)
                 {
                     if (c.Selected == true)
@@ -87,6 +88,45 @@ namespace GraphSearch
                 {
                     c.Remove();
                     shapes.RemoveElement(c);    
+                }
+            }
+            if(e.Key == Key.G) 
+            {
+                var group = new ShapeGroup();
+                List<IShape> deleted = new List<IShape>();
+                foreach (var c in shapes)
+                {
+                    if (c.Selected == true)
+                    {
+                            
+                            group.Add(c);
+                            deleted.Add(c);
+                            
+                    }
+                }
+                foreach (var d in deleted)
+                {
+                    shapes.RemoveElement(d);
+                }
+                shapes.AddElement(group);
+            }
+            if(e.Key == Key.U)
+            {
+                foreach (var c in shapes)
+                {
+                    if (c.Selected == true)
+                    {
+                        if (c is ShapeGroup)
+                        {
+                            foreach (var m in (c as ShapeGroup).shapes)
+                            {
+                                m.Unselect();
+                                shapes.AddElement(m);
+                            }
+                            shapes.RemoveElement(c);
+                            
+                        }
+                    }
                 }
             }
             #region MoveControls
@@ -137,25 +177,23 @@ namespace GraphSearch
             if(shapes != null)
             foreach (var c in shapes)
             {
-                if (c.Selected == true)
+                if (c.Selected == true && c is Shape)
                 {
-                    c.SetColor((((((ColorBox.SelectedItem as ComboBoxItem).Content as StackPanel).Children[0] as System.Windows.Shapes.Rectangle).Fill 
+                    (c as Shape).SetColor((((((ColorBox.SelectedItem as ComboBoxItem).Content as StackPanel).Children[0] as System.Windows.Shapes.Rectangle).Fill 
                             as SolidColorBrush).Color));
                 }
             }
         }
-
         private void SizeSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             foreach (var c in shapes)
             {
-                if (c.Selected == true)
+                if (c.Selected == true && c is Shape)
                 {
-                    c.SetSize((int)SizeSlider.Value);
+                    (c as Shape).SetSize((int)SizeSlider.Value);
                 }
             }
         }
-
         private void ShapeButtonChecked(object sender, RoutedEventArgs e)
         {
             foreach(var el in UpToolBar.Items)

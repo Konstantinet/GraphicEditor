@@ -11,7 +11,6 @@ namespace GraphSearch
 {
     class Sqare : Shape
     {
-
         public int Height { get; set; }  = 50;
 
         public Sqare(Canvas canvas, double x, double y) : base(canvas, x, y)
@@ -24,17 +23,24 @@ namespace GraphSearch
                     return true;
             return false;
         }
-
-        public override bool IsOutOfBounds()
+        public override bool IsOutOfBounds(double dx, double dy)
         {
-            if (((X + Height/2) > canvas.ActualWidth) || ((Y + Height/2) > canvas.ActualHeight) || (X < (0 + Height/2)) || (Y < (0 + Height/2)))
+            if ((((X +dx)+ Height/2) > canvas.ActualWidth) || (((Y+dy) + Height/2) > canvas.ActualHeight) || 
+                ((X + dx) < (0 + Height/2)) || ((Y+dy) < (0 + Height/2)))
                 return true;
             return false;
         }
-
+        public override void Move(double dx, double dy)
+        {
+            if (!IsOutOfBounds(dx,dy))
+            {
+                X = X + dx;
+                Y = Y + dy;
+            }
+            Paint();
+        }
         public override int GetSize() => Height;
         public override void SetSize(int size) { Height = size; Paint(); }
-
         public override void Paint()
         {
             if (drawing == null)
@@ -53,7 +59,6 @@ namespace GraphSearch
             else
                 drawing.Stroke = Brushes.Black;
         }
-
         public override void Remove()
         {
             if (drawing != null)

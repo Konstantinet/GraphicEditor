@@ -13,9 +13,7 @@ namespace GraphSearch
         public int XRadius { get; set; } = 30;
         public int YRadius { get; set; } = 20;
 
-        public Ellipse(Canvas canvas, double x, double y) : base(canvas, x, y)
-        {
-        }
+        public Ellipse(Canvas canvas, double x, double y) : base(canvas, x, y) { }
         public override bool HitTest(double x, double y)
         {
             if ((Math.Pow((x - X), 2)/ Math.Pow(XRadius, 2) + Math.Pow((y - Y), 2)/Math.Pow(YRadius,2)) <= 1)
@@ -24,17 +22,23 @@ namespace GraphSearch
                 return false;
         }
 
-        public override bool IsOutOfBounds()
+        public override bool IsOutOfBounds(double dx, double dy)
         {
-            if (((X + XRadius) > (canvas.ActualWidth)) || ((Y + YRadius) > canvas.ActualHeight) || (X < (0 + XRadius)) || (Y < (0 + YRadius)))
+            if (((X+dx + XRadius) > (canvas.ActualWidth)) || ((Y +dy+ YRadius) > canvas.ActualHeight) || (X+dx < (0 + XRadius)) || (Y+dy < (0 + YRadius)))
                 return true;
             return false;
         }
-
+        public override void Move(double dx, double dy)
+        {
+            if (!IsOutOfBounds(dx,dy))
+            {
+                X = X + dx;
+                Y = Y + dy;
+            }
+            Paint();
+        }
         public override int GetSize() => YRadius;
-
         public override void SetSize(int size) { YRadius = size; XRadius = (int)(size * 1.5);Paint(); }
-
         public override void Paint()
         {
             if (drawing == null)
@@ -53,7 +57,6 @@ namespace GraphSearch
             else
                 drawing.Stroke = Brushes.Black;
         }
-
         public override void Remove()
         {
             if (drawing != null)
