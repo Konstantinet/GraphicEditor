@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.30517.126
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GraphSearch", "GraphSearch\GraphSearch.csproj", "{BF61A739-B7BA-4D38-AD49-3E79C0535409}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Storage", "..\Storage\Storage\Storage.csproj", "{05516C27-55B9-4729-BB35-2D36FFF1994C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UniStorage", "UniStorage\UniStorage.csproj", "{B06FA7BF-38B4-4A48-B1F8-7ED40817F5F3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +17,10 @@ Global
 		{BF61A739-B7BA-4D38-AD49-3E79C0535409}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BF61A739-B7BA-4D38-AD49-3E79C0535409}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BF61A739-B7BA-4D38-AD49-3E79C0535409}.Release|Any CPU.Build.0 = Release|Any CPU
-		{05516C27-55B9-4729-BB35-2D36FFF1994C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{05516C27-55B9-4729-BB35-2D36FFF1994C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{05516C27-55B9-4729-BB35-2D36FFF1994C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{05516C27-55B9-4729-BB35-2D36FFF1994C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B06FA7BF-38B4-4A48-B1F8-7ED40817F5F3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B06FA7BF-38B4-4A48-B1F8-7ED40817F5F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B06FA7BF-38B4-4A48-B1F8-7ED40817F5F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B06FA7BF-38B4-4A48-B1F8-7ED40817F5F3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
