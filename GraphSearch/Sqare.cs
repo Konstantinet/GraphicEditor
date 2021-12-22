@@ -14,11 +14,8 @@ namespace GraphSearch
 
         public int Height { get; set; }  = 50;
 
-        public Sqare(double x,double y)
+        public Sqare(Canvas canvas, double x, double y) : base(canvas, x, y)
         {
-            X = x;
-            Y = y;
-            Selected = true;
         }
         public override bool HitTest(double x, double y)
         {
@@ -28,25 +25,22 @@ namespace GraphSearch
             return false;
         }
 
-        public override bool IsOutOfBounds(Canvas canvas)
+        public override bool IsOutOfBounds()
         {
-            if (((X + Height) > canvas.Width) || ((Y + Height) > canvas.Height))
+            if (((X + Height/2) > canvas.ActualWidth) || ((Y + Height/2) > canvas.ActualHeight) || (X < (0 + Height/2)) || (Y < (0 + Height/2)))
                 return true;
             return false;
         }
 
         public override int GetSize() => Height;
-        public override void SetSize(int size) => Height = size;
-        public override void Resize(int d)
-        {
-            Height += d;
-        }
+        public override void SetSize(int size) { Height = size; Paint(); }
 
-        public override void Paint(Canvas canvas)
+        public override void Paint()
         {
             if (drawing == null)
             {
                 drawing = new Rectangle();
+                drawing.StrokeThickness = 2;
                 canvas.Children.Add(drawing);
             }
             drawing.Fill = new SolidColorBrush(Color);
@@ -60,7 +54,7 @@ namespace GraphSearch
                 drawing.Stroke = Brushes.Black;
         }
 
-        public override void Remove(Canvas canvas)
+        public override void Remove()
         {
             if (drawing != null)
             {

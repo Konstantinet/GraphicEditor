@@ -29,35 +29,36 @@ namespace GraphSearch
                   
                     if(!(Keyboard.IsKeyDown(Key.LeftCtrl) || Keyboard.IsKeyDown(Key.RightCtrl)))
                     {
-                        UncheckAll();
+                        foreach (var c in shapes)
+                            c.Unselect();
                     }
 
                     foreach (ComboBoxItem i in ColorBox.Items)
                     {
-                        if (s.Color.Equals( ((((i.Content as StackPanel).Children[0] as System.Windows.Shapes.Rectangle).Fill as SolidColorBrush).Color)))
+                        if (s.GetColor().Equals( ((((i.Content as StackPanel).Children[0] as System.Windows.Shapes.Rectangle).Fill as SolidColorBrush).Color)))
                         ColorBox.SelectedItem = i;
                     }
                     SizeSlider.Value = s.GetSize();
-                    SelectShape(s);
+                    s.Select();
                     e.Handled = true;
                     return;
                 }
             }
             System.Windows.Point pt = e.GetPosition(canvas);
-            UncheckAll();
+            foreach (var c in shapes)
+                c.Unselect();
 
             Shape shape= null;
             if (CircleButton.IsChecked == true)
-                shape = new Circle(e.GetPosition(canvas).X, e.GetPosition(canvas).Y);
+                shape = new Circle(canvas,e.GetPosition(canvas).X, e.GetPosition(canvas).Y);
             if (SquareButton.IsChecked == true)
-                shape = new Sqare(e.GetPosition(canvas).X, e.GetPosition(canvas).Y);
+                shape = new Sqare(canvas,e.GetPosition(canvas).X, e.GetPosition(canvas).Y);
             if(EllipseButton.IsChecked == true)
-                shape = new Ellipse(e.GetPosition(canvas).X, e.GetPosition(canvas).Y);
+                shape = new Ellipse(canvas,e.GetPosition(canvas).X, e.GetPosition(canvas).Y);
 
             SizeSlider.Value = shape.GetSize();
-            shape.Color = ((((ColorBox.SelectedItem as ComboBoxItem).Content as StackPanel).Children[0] as System.Windows.Shapes.Rectangle).Fill
-                as SolidColorBrush).Color;
-            shape.Paint(canvas);
+            shape.SetColor(((((ColorBox.SelectedItem as ComboBoxItem).Content as StackPanel).Children[0] as System.Windows.Shapes.Rectangle).Fill
+                as SolidColorBrush).Color);
             shapes.Add(shape); 
         }
 
@@ -69,7 +70,7 @@ namespace GraphSearch
                 {
                     if (c.Selected == true)
                     {
-                        UnselectShape(c);
+                        c.Unselect();
                     }
                 }
             }
@@ -85,7 +86,7 @@ namespace GraphSearch
                 }
                 foreach(var c in deleted)
                 {
-                    c.Remove(canvas);
+                    c.Remove();
                     shapes.Remove(c);    
                 }
             }
@@ -96,8 +97,7 @@ namespace GraphSearch
                 {
                     if (c.Selected == true)
                     {
-                    c.Move(canvas,-1, 0);
-                    //c.Paint(canvas);
+                    c.Move(-1, 0);
                     }
                 }
             }
@@ -107,8 +107,7 @@ namespace GraphSearch
                 {
                     if (c.Selected == true)
                     {
-                        c.Move(canvas,1, 0);
-                        //c.Paint(canvas);
+                        c.Move(1, 0);
                     }
                 }
             }
@@ -118,8 +117,7 @@ namespace GraphSearch
                 {
                     if (c.Selected == true)
                     {
-                        c.Move(canvas,0, -1);
-                        //c.Paint(canvas);
+                        c.Move(0, -1);
                     }
                 }
             }
@@ -129,31 +127,12 @@ namespace GraphSearch
                 {
                     if (c.Selected == true)
                     {
-                        c.Move(canvas,0, 1);
-                        //c.Paint(canvas);
+                        c.Move(0, 1);
                     }
                 }
             }
             #endregion
         }
-        void UncheckAll()
-        {
-            foreach (var c in shapes)
-            {
-                UnselectShape(c);
-            }
-        }
-        void SelectShape(Shape shape)
-        {
-            shape.Select();
-            shape.Paint(canvas);
-        }
-        void UnselectShape(Shape shape)
-        {
-            shape.Unselect();
-            shape.Paint(canvas);
-        }
-
         private void ComboBox_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
             if(shapes != null)
@@ -161,9 +140,8 @@ namespace GraphSearch
             {
                 if (c.Selected == true)
                 {
-                    c.Color = (((((ColorBox.SelectedItem as ComboBoxItem).Content as StackPanel).Children[0] as System.Windows.Shapes.Rectangle).Fill 
-                            as SolidColorBrush).Color);
-                    c.Paint(canvas);
+                    c.SetColor((((((ColorBox.SelectedItem as ComboBoxItem).Content as StackPanel).Children[0] as System.Windows.Shapes.Rectangle).Fill 
+                            as SolidColorBrush).Color));
                 }
             }
         }
@@ -175,7 +153,6 @@ namespace GraphSearch
                 if (c.Selected == true)
                 {
                     c.SetSize((int)SizeSlider.Value);
-                    c.Paint(canvas);
                 }
             }
         }

@@ -8,14 +8,12 @@ namespace GraphSearch
 {
     public class Circle : Shape
     {
+        public Circle(Canvas canvas,double x,double y):base(canvas,x,y)
+        {
+        }
+
         public int Radius { get; set; } = 25;
 
-        public Circle(double x, double y)
-        {
-            X = x;
-            Y = y;
-            Selected = true;
-        }
         public override bool HitTest(double x, double y)
         {
             if ((Math.Pow((x - X), 2) + Math.Pow((y - Y), 2)) <= Math.Pow(Radius, 2))
@@ -24,7 +22,7 @@ namespace GraphSearch
                 return false;
         }
 
-        public override bool IsOutOfBounds(Canvas canvas)
+        public override bool IsOutOfBounds()
         {
             if (((X + Radius) > (canvas.ActualWidth)) || ((Y + Radius) > canvas.ActualHeight) || (X < (0 + Radius)) || (Y < (0 + Radius)))
                 return true;
@@ -32,17 +30,14 @@ namespace GraphSearch
         }
 
         public override int GetSize() => Radius;
-        public override void SetSize(int size) => Radius = size;
-        public override void Resize(int d)
-        {
-            Radius += d;
-        }
+        public override void SetSize(int size) { Radius = size; Paint(); }
 
-        public override void Paint(Canvas canvas)
+        public override void Paint()
         {
             if (drawing == null)
             {
                 drawing = new System.Windows.Shapes.Ellipse();
+                drawing.StrokeThickness = 2;
                 canvas.Children.Add(drawing);
             }
             drawing.Fill = new SolidColorBrush(Color);
@@ -56,7 +51,7 @@ namespace GraphSearch
                 drawing.Stroke = Brushes.Black;
         }
 
-        public override void Remove(Canvas canvas)
+        public override void Remove()
         {
             if (drawing != null)
             {

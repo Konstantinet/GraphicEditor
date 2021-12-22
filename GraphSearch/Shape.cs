@@ -8,35 +8,49 @@ namespace GraphSearch
     {
         protected double X, Y;
 
-        public Color Color { get; set; }
+        protected Canvas canvas;
+
+        public Shape(Canvas canvas, double x,double y)
+        {
+            X = x;
+            Y = y;
+            Selected = true;
+            this.canvas = canvas;
+            Paint();
+        }
+
+        protected Color Color;
         public bool Selected { get; protected set; }
 
         protected System.Windows.Shapes.Shape drawing;
 
         public abstract bool HitTest(double x, double y);
 
-        public abstract bool IsOutOfBounds(Canvas canvas);
+        public abstract bool IsOutOfBounds();
 
         public abstract int GetSize();
 
         public abstract void SetSize(int size);
-        public abstract void Resize(int d);
 
-        public void Move(Canvas canvas,double dx, double dy)
+        public void Move(double dx, double dy)
         {
             X = X + dx;
             Y = Y + dy;
-            if (IsOutOfBounds(canvas))
+            if (IsOutOfBounds())
             {
                 X = X - dx;
                 Y = Y - dy;
             }
-            Paint(canvas);
+            Paint();
         }
-        public abstract void Paint(Canvas canvas);
+        public abstract void Paint();
 
-        public abstract void Remove(Canvas canvas);
-        public void Select() => Selected = true;
-        public void Unselect() => Selected = false;
+        public abstract void Remove();
+
+        public Color GetColor() => Color;
+        
+        public void SetColor(Color color) { Color = color;Paint(); }
+        public void Select() { Selected = true;Paint(); }
+        public void Unselect() { Selected = false; Paint(); }
     }
 }

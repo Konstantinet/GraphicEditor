@@ -13,11 +13,8 @@ namespace GraphSearch
         public int XRadius { get; set; } = 30;
         public int YRadius { get; set; } = 20;
 
-        public Ellipse(double x, double y)
+        public Ellipse(Canvas canvas, double x, double y) : base(canvas, x, y)
         {
-            X = x;
-            Y = y;
-            Selected = true;
         }
         public override bool HitTest(double x, double y)
         {
@@ -27,27 +24,23 @@ namespace GraphSearch
                 return false;
         }
 
-        public override bool IsOutOfBounds(Canvas canvas)
+        public override bool IsOutOfBounds()
         {
-            if (((X + XRadius) > (canvas.Width)) || ((Y + YRadius) > canvas.Height))
+            if (((X + XRadius) > (canvas.ActualWidth)) || ((Y + YRadius) > canvas.ActualHeight) || (X < (0 + XRadius)) || (Y < (0 + YRadius)))
                 return true;
             return false;
         }
 
         public override int GetSize() => YRadius;
 
-        public override void SetSize(int size) { YRadius = size; XRadius = (int)(size * 1.5); }
-        public override void Resize(int d)
-        {
-            XRadius += d;
-            YRadius += d;
-        }
+        public override void SetSize(int size) { YRadius = size; XRadius = (int)(size * 1.5);Paint(); }
 
-        public override void Paint(Canvas canvas)
+        public override void Paint()
         {
             if (drawing == null)
             {
                 drawing = new System.Windows.Shapes.Ellipse();
+                drawing.StrokeThickness = 2;
                 canvas.Children.Add(drawing);
             }
             drawing.Fill = new SolidColorBrush(Color);
@@ -61,7 +54,7 @@ namespace GraphSearch
                 drawing.Stroke = Brushes.Black;
         }
 
-        public override void Remove(Canvas canvas)
+        public override void Remove()
         {
             if (drawing != null)
             {
