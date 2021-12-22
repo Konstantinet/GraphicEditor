@@ -1,10 +1,11 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 
 namespace UniStorage
 {
-    public class UniversalStoradge<T>
+    public class UniversalStoradge<T>:IEnumerable<T>
     {
         private int Size;
         Node<T> First;
@@ -95,6 +96,21 @@ namespace UniStorage
                     return false;
                 else
                     return true;
+            }
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return ((IEnumerable)this).GetEnumerator();
+        }
+
+        IEnumerator<T> IEnumerable<T>.GetEnumerator()
+        {
+            Node<T> current = First;
+            while (current != null)
+            {
+                yield return current.Data;
+                current = current.Next;
             }
         }
     }

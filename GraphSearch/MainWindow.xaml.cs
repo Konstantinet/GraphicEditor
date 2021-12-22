@@ -4,7 +4,6 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Linq;
 using System.Windows.Shapes;
 using UniStorage;
 using System.Windows.Controls.Primitives;
@@ -13,11 +12,11 @@ namespace GraphSearch
 {
     public partial class MainWindow : Window
     {
-        public List<Shape> shapes;
+        public UniversalStoradge<Shape> shapes;
         public MainWindow()
         {
             InitializeComponent();
-            shapes = new List<Shape>();  
+            shapes = new UniversalStoradge<Shape>();  
         }
 
 
@@ -59,7 +58,7 @@ namespace GraphSearch
             SizeSlider.Value = shape.GetSize();
             shape.SetColor(((((ColorBox.SelectedItem as ComboBoxItem).Content as StackPanel).Children[0] as System.Windows.Shapes.Rectangle).Fill
                 as SolidColorBrush).Color);
-            shapes.Add(shape); 
+            shapes.AddElement(shape); 
         }
 
         private void Window_KeyDown(object sender, KeyEventArgs e)
@@ -87,7 +86,7 @@ namespace GraphSearch
                 foreach(var c in deleted)
                 {
                     c.Remove();
-                    shapes.Remove(c);    
+                    shapes.RemoveElement(c);    
                 }
             }
             #region MoveControls
