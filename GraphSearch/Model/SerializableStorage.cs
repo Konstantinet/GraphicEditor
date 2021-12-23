@@ -3,21 +3,26 @@ using UniStorage;
 
 namespace GraphSearch.Model
 {
-    public class SerializableStorage<T>:UniversalStoradge<T>
+    public class SerializableStorage<T>:UniversalStoradge<IShape>
     {
-        public void LoadComponents(string path,ShapeFactory factory)
+        public void LoadComponents(object loader, StreamReader sr, ShapeFactory factory)
         {
-            using (StreamReader sr = new StreamReader(path))
+
+            int count = int.Parse(sr.ReadLine());
+            for (int i = 0; i < count; i++)
             {
-                int count = int.Parse(sr.ReadLine());
-                for(int i = 0; i < count; i++)
-                {
-                    var code = sr.ReadLine();
-                    var shape = factory.CreateShape(code);
-                    if(shape != null)
-                        shape.Load(sr);
-                }
+                var code = sr.ReadLine();
+                var shape = factory.CreateShape(code);
+                if (shape is ShapeGroup)
+                    LoadComponents(shape, sr, factory);
+                else if (shape != null)
+                    shape.Load(sr);
+                if (loader is ShapeGroup)
+                    (loader as ShapeGroup).Add(shape);
+                else
+                    AddElement(shape);
             }
+
         }
     }
 }

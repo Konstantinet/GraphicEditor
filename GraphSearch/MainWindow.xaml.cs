@@ -10,6 +10,7 @@ using System.Windows.Controls.Primitives;
 using GraphSearch.Model;
 using System.IO;
 using Microsoft.Win32;
+using System;
 
 namespace GraphSearch
 {
@@ -204,7 +205,7 @@ namespace GraphSearch
                     (el as ToggleButton).IsChecked = false;
             }
         }
-        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        private void FileSave(object sender, EventArgs e)
         {
             if (MessageBox.Show("Do you want to save the file?",
                     "Save file",
@@ -229,7 +230,7 @@ namespace GraphSearch
             var fd = new OpenFileDialog();
             if (fd.ShowDialog() == true) {
                 var factory = new ShapeFactory(canvas);
-                shapes.LoadComponents(fd.FileName, factory);
+                shapes.LoadComponents(shapes,new StreamReader(fd.FileName), factory);
             }
         }
     }

@@ -78,12 +78,17 @@ namespace GraphSearch
 
         public void Save(StreamWriter sw)
         {
-            throw new System.NotImplementedException();
+            sw.WriteLine("Group");
+            sw.WriteLine(shapes.GetCount());
+            foreach(var s in shapes)
+            {
+                s.Save(sw);
+            }
         }
 
         public void Load(StreamReader sr)
         {
-            throw new System.NotImplementedException();
+            
         }
     }
 }
