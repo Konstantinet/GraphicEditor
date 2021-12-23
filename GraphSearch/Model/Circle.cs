@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -8,10 +9,7 @@ namespace GraphSearch
 {
     public class Circle : Shape
     {
-        public Circle(Canvas canvas,double x,double y):base(canvas,x,y)
-        {
-        }
-
+        public Circle(Canvas canvas, double x, double y) : base(canvas, x, y) { }
         public int Radius { get; set; } = 25;
 
         public override bool HitTest(double x, double y)
@@ -21,7 +19,6 @@ namespace GraphSearch
             else
                 return false;
         }
-
         public override bool IsOutOfBounds(double dx, double dy)
         {
             if (((X+dx + Radius) > (canvas.ActualWidth)) || ((Y+dy + Radius) > canvas.ActualHeight) || (X+dx < (0 + Radius)) || (Y+dy < (0 + Radius)))
@@ -57,7 +54,6 @@ namespace GraphSearch
             else
                 drawing.Stroke = Brushes.Black;
         }
-
         public override void Remove()
         {
             if (drawing != null)
@@ -65,6 +61,26 @@ namespace GraphSearch
                 canvas.Children.Remove(drawing);
             }
         }
+
+        public override void Save(StreamWriter sw)
+        {
+            sw.WriteLine("Circle");
+            sw.WriteLine(X.ToString() + ' ' + Y.ToString());
+            sw.WriteLine(Radius);
+            sw.WriteLine(Color.ToString());
+        }
+
+        public override void Load(StreamReader sr)
+        {
+            var str = sr.ReadLine();
+            X = double.Parse(str.Split(' ')[0]);
+            Y = double.Parse(str.Split(' ')[1]);
+            Radius = int.Parse(sr.ReadLine());
+            Color = (Color)ColorConverter.ConvertFromString(sr.ReadLine());
+            Paint();
+        }
+
+        
 
 
     }

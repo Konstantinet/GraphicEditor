@@ -1,4 +1,5 @@
 ﻿using GraphSearch.Model;
+using System.IO;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -30,6 +31,8 @@ namespace GraphSearch
         public abstract void Move(double dx, double dy);
         public abstract void Paint();
         public abstract void Remove();
+        public abstract void Save(StreamWriter sw);
+        public abstract void Load(StreamReader sr);
 
         public Color GetColor() => Color;
         public void SetColor(Color color) { Color = color;Paint(); }

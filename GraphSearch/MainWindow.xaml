@@ -7,6 +7,7 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="522.581" Width="887.097"
         KeyDown="Window_KeyDown"
+        Closing="Window_Closing"
         >
     <Grid>
         <Grid.RowDefinitions>
@@ -48,6 +49,10 @@
                     </StackPanel>
                 </ComboBoxItem>
             </ComboBox>
+            <Separator/>
+            <Button Width="30" Height="30" Background="Transparent" Click="Button_Click">
+                <Image  Width="25" Height="25" Source="pack://application:,,,/Recources/load.png"/>
+            </Button>
         </ToolBar>
 
     </Grid>

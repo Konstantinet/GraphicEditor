@@ -1,4 +1,5 @@
 ﻿using GraphSearch.Model;
+using System.IO;
 using UniStorage;
 
 namespace GraphSearch
@@ -73,6 +74,16 @@ namespace GraphSearch
             {
                 shape.Remove();
             }
+        }
+
+        public void Save(StreamWriter sw)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void Load(StreamReader sr)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

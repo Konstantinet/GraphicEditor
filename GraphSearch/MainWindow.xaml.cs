@@ -8,16 +8,18 @@ using System.Windows.Shapes;
 using UniStorage;
 using System.Windows.Controls.Primitives;
 using GraphSearch.Model;
+using System.IO;
+using Microsoft.Win32;
 
 namespace GraphSearch
 {
     public partial class MainWindow : Window
     {
-        public UniversalStoradge<IShape> shapes;
+        public SerializableStorage<IShape> shapes;
         public MainWindow()
         {
             InitializeComponent();
-            shapes = new UniversalStoradge<IShape>();  
+            shapes = new SerializableStorage<IShape>();  
         }
         private void Canvas_MouseDown(object sender, MouseButtonEventArgs e)
         {
@@ -200,6 +202,34 @@ namespace GraphSearch
             {
                 if (el is ToggleButton && (el != sender as ToggleButton))
                     (el as ToggleButton).IsChecked = false;
+            }
+        }
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (MessageBox.Show("Do you want to save the file?",
+                    "Save file",
+                    MessageBoxButton.YesNo,
+                    MessageBoxImage.Question) == MessageBoxResult.Yes)
+            {
+                var sfd = new SaveFileDialog();
+                if (sfd.ShowDialog() == true)
+                    using (StreamWriter sw = new StreamWriter(new FileStream(sfd.FileName, FileMode.Create, FileAccess.Write)))
+                    {
+                        sw.WriteLine(shapes.GetCount());
+                        foreach (var shape in shapes)
+                        {
+                            shape.Save(sw);
+                        }
+                    }
+            }
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            var fd = new OpenFileDialog();
+            if (fd.ShowDialog() == true) {
+                var factory = new ShapeFactory(canvas);
+                shapes.LoadComponents(fd.FileName, factory);
             }
         }
     }

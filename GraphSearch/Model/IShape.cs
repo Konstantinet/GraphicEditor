@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,5 +17,8 @@ namespace GraphSearch.Model
         void Move(double dx, double dy);
         void Paint();
         void Remove();
+
+        void Save(StreamWriter sw);
+        void Load(StreamReader sr);
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -65,6 +66,22 @@ namespace GraphSearch
             {
                 canvas.Children.Remove(drawing);
             }
+        }
+        public override void Save(StreamWriter sw)
+        {
+            sw.WriteLine("Square");
+            sw.WriteLine(X.ToString() + ' ' + Y.ToString());
+            sw.WriteLine(Height);
+            sw.WriteLine(Color.ToString());
+        }
+        public override void Load(StreamReader sr)
+        {
+            var str = sr.ReadLine();
+            X = double.Parse(str.Split(' ')[0]);
+            Y = double.Parse(str.Split(' ')[1]);
+            Height = int.Parse(sr.ReadLine());
+            Color = (Color)ColorConverter.ConvertFromString(sr.ReadLine());
+            Paint();
         }
     }
 }

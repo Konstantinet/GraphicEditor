@@ -59,7 +59,9 @@
     <Compile Include="Model\Circle.cs" />
     <Compile Include="Model\Ellipse.cs" />
     <Compile Include="Model\IShape.cs" />
+    <Compile Include="Model\SerializableStorage.cs" />
     <Compile Include="Model\Shape.cs" />
+    <Compile Include="Model\ShapeFactory.cs" />
     <Compile Include="Model\ShapeGroup.cs" />
     <Compile Include="Model\Sqare.cs" />
     <Page Include="MainWindow.xaml">
@@ -111,6 +113,9 @@
       <Project>{b06fa7bf-38b4-4a48-b1f8-7ed40817f5f3}</Project>
       <Name>UniStorage</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Recources\load.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
