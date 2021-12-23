@@ -32,11 +32,13 @@ namespace GraphSearch
         public abstract void Paint();
         public abstract void Remove();
         public abstract void Save(StreamWriter sw);
-        public abstract void Load(StreamReader sr);
+        public abstract void Load(StreamReader sr,AbstractFactory factory);
 
         public Color GetColor() => Color;
         public void SetColor(Color color) { Color = color;Paint(); }
         public void Select() { selected = true;Paint(); }
         public void Unselect() { selected = false; Paint(); }
+
+       
     }
 }

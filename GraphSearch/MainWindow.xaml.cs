@@ -36,7 +36,7 @@ namespace GraphSearch
                     }
                     if (s is Shape)
                     {
-                        if ((from i in shapes where i.Selected == true select i).Count() == 1 && !(Keyboard.IsKeyDown(Key.LeftCtrl) || Keyboard.IsKeyDown(Key.RightCtrl)))
+                        if (!(Keyboard.IsKeyDown(Key.LeftCtrl) || Keyboard.IsKeyDown(Key.RightCtrl)))
                         {
                             foreach (ComboBoxItem i in ColorBox.Items)
                             {
@@ -114,6 +114,7 @@ namespace GraphSearch
                 {
                     shapes.RemoveElement(d);
                 }
+                if(group.shapes.GetCount() == 0)
                 shapes.AddElement(group);
             }
             if(e.Key == Key.U)
@@ -183,9 +184,9 @@ namespace GraphSearch
             if(shapes != null)
             foreach (var c in shapes)
             {
-                if (c.Selected == true && c is Shape)
+                if (c.Selected == true)
                 {
-                    (c as Shape).SetColor((((((ColorBox.SelectedItem as ComboBoxItem).Content as StackPanel).Children[0] as System.Windows.Shapes.Rectangle).Fill 
+                    c.SetColor((((((ColorBox.SelectedItem as ComboBoxItem).Content as StackPanel).Children[0] as System.Windows.Shapes.Rectangle).Fill 
                             as SolidColorBrush).Color));
                 }
             }
@@ -194,9 +195,9 @@ namespace GraphSearch
         {
             foreach (var c in shapes)
             {
-                if (c.Selected == true && c is Shape)
+                if (c.Selected == true)
                 {
-                    (c as Shape).SetSize((int)SizeSlider.Value);
+                    c.SetSize((int)SizeSlider.Value);
                 }
             }
         }
@@ -232,8 +233,8 @@ namespace GraphSearch
         {
             var fd = new OpenFileDialog();
             if (fd.ShowDialog() == true) {
-                var factory = new ShapeFactory(canvas);
-                shapes.LoadComponents(shapes,new StreamReader(fd.FileName), factory);
+                var factory = new ShapeFactory(canvas) ;
+                shapes.LoadComponents(new StreamReader(fd.FileName), factory);
             }
         }
     }

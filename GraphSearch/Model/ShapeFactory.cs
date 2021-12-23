@@ -3,14 +3,14 @@ using System.Windows.Controls;
 
 namespace GraphSearch.Model
 {
-    public class ShapeFactory
+    public class ShapeFactory : AbstractFactory
     {
         Canvas canvas;
         public ShapeFactory(Canvas canvas)
         {
             this.canvas = canvas; 
         }
-        public IShape CreateShape(string shape)
+        public override IShape CreateShape(string shape)
         {
             if (shape == "Circle")
                 return new Circle(canvas,0,0);
@@ -22,7 +22,6 @@ namespace GraphSearch.Model
                 return new ShapeGroup();
             else
                 return null;
-
         }
     }
 }

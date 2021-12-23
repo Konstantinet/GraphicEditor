@@ -35,7 +35,14 @@ namespace GraphSearch
             Paint();
         }
         public override int GetSize() => Radius;
-        public override void SetSize(int size) { Radius = size; Paint(); }
+        public override void SetSize(int size) 
+        {
+            var temp = Radius;
+            Radius = size;
+            if (IsOutOfBounds(0, 0))
+                Radius = temp;
+            Paint(); 
+        }
         public override void Paint()
         {
             if (drawing == null)
@@ -70,7 +77,7 @@ namespace GraphSearch
             sw.WriteLine(Color.ToString());
         }
 
-        public override void Load(StreamReader sr)
+        public override void Load(StreamReader sr,AbstractFactory factory)
         {
             var str = sr.ReadLine();
             X = double.Parse(str.Split(' ')[0]);

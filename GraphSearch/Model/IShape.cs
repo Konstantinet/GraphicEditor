@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media;
 
 namespace GraphSearch.Model
 {
@@ -17,8 +18,10 @@ namespace GraphSearch.Model
         void Move(double dx, double dy);
         void Paint();
         void Remove();
+        void SetColor(Color color);
+        void SetSize(int size);
 
         void Save(StreamWriter sw);
-        void Load(StreamReader sr);
+        void Load(StreamReader sr,AbstractFactory factory);
     }
 }

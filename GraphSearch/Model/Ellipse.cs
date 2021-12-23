@@ -72,7 +72,7 @@ namespace GraphSearch
             sw.WriteLine(XRadius.ToString()+' '+YRadius.ToString());
             sw.WriteLine(Color.ToString());
         }
-        public override void Load(StreamReader sr)
+        public override void Load(StreamReader sr,AbstractFactory factory)
         {
             var str = sr.ReadLine();
             X = double.Parse(str.Split(' ')[0]);

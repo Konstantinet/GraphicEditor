@@ -1,5 +1,6 @@
 ﻿using GraphSearch.Model;
 using System.IO;
+using System.Windows.Media;
 using UniStorage;
 
 namespace GraphSearch
@@ -35,9 +36,9 @@ namespace GraphSearch
         }
         public void Move(double dx, double dy)
         {
+            if(!IsOutOfBounds(dx, dy))
             foreach (var shape in shapes)
             {
-                if(!IsOutOfBounds(dx,dy))
                 shape.Move(dx, dy);
             }
         }
@@ -75,6 +76,16 @@ namespace GraphSearch
                 shape.Remove();
             }
         }
+        public void SetColor(Color color) {
+            foreach (var s in shapes)
+                s.SetColor(color);
+        }
+
+        public void SetSize(int size)
+        {
+            foreach (var shape in shapes)
+                shape.SetSize(size);
+        }
 
         public void Save(StreamWriter sw)
         {
@@ -86,9 +97,17 @@ namespace GraphSearch
             }
         }
 
-        public void Load(StreamReader sr)
+        public void Load(StreamReader sr , AbstractFactory factory)
         {
-            
+            int count = int.Parse(sr.ReadLine());
+            for (int i = 0; i < count; i++)
+            {
+                var code = sr.ReadLine();
+                var shape = factory.CreateShape(code);
+                if (shape != null)
+                    shape.Load(sr,factory);
+                    Add(shape);
+            }
         }
     }
 }

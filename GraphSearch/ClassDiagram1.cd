@@ -3,46 +3,39 @@
   <Class Name="GraphSearch.Shape">
     <Position X="7.5" Y="1.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAIBAAACAAAAIBAICAAAAAACAgAgAwAAIYAI=</HashCode>
+      <HashCode>AAAAgIAAAIBAAACAAAAIBAICAAAAAACAgAgAwgAIYAI=</HashCode>
       <FileName>Model\Shape.cs</FileName>
     </TypeIdentifier>
-    <Lollipop Position="0.2" />
+    <Lollipop Position="0.1" />
   </Class>
   <Class Name="GraphSearch.ShapeGroup">
-    <Position X="3" Y="1.5" Width="1.5" />
+    <Position X="4.5" Y="1.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAIAAAAAAIBAAAAAAAAAAAIAAAAAAAAAAAAAQAAIBAA=</HashCode>
+      <HashCode>AAIAgIAAAIBAAAAAAAAABAIAAAAAAAAAAAAAQgAIBAI=</HashCode>
       <FileName>Model\ShapeGroup.cs</FileName>
     </TypeIdentifier>
-    <Lollipop Position="1.3" />
+    <Lollipop Position="1.25" />
   </Class>
   <Class Name="GraphSearch.Sqare" Collapsed="true">
     <Position X="5.75" Y="6.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAABIBAAACAAAAIBAIAAAAAAAAAAAAAAAAIAAA=</HashCode>
+      <HashCode>AAAAgIAABIBAAACAAAAIBAIAAAAAAAAAAAAAAAAIAAA=</HashCode>
       <FileName>Model\Sqare.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="GraphSearch.Circle" Collapsed="true">
     <Position X="7.5" Y="6.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAIAAAAAIBAAACAAAAIBAIAAAAAAAAAAAAAAAAIAAA=</HashCode>
+      <HashCode>AAAIgIAAAIBAAACAAAAIBAIAAAAAAAAAAAAAAAAIAAA=</HashCode>
       <FileName>Model\Circle.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="GraphSearch.Ellipse">
+  <Class Name="GraphSearch.Ellipse" Collapsed="true">
     <Position X="9.25" Y="6.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAIBAAACAAAAIBAIAAIABAAAAAAAAAAAIAAA=</HashCode>
+      <HashCode>AAAAgIAAAIBAAACAAAAIBAIAAIABAAAAAAAAAAAIAAA=</HashCode>
       <FileName>Model\Ellipse.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Interface Name="GraphSearch.Model.IShape">
-    <Position X="5.25" Y="0.5" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAIBAAAAAAAAAAAIAAAAAAAAAAAAAQAAIAAA=</HashCode>
-      <FileName>Model\IShape.cs</FileName>
-    </TypeIdentifier>
-  </Interface>
   <Font Name="Segoe UI" Size="9" />
 </ClassDiagram>
