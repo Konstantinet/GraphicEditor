@@ -11,6 +11,7 @@ using GraphSearch.Model;
 using System.IO;
 using Microsoft.Win32;
 using System;
+using System.Linq;
 
 namespace GraphSearch
 {
@@ -33,15 +34,17 @@ namespace GraphSearch
                         foreach (var c in shapes)
                             c.Unselect();
                     }
-
                     if (s is Shape)
                     {
-                        foreach (ComboBoxItem i in ColorBox.Items)
+                        if ((from i in shapes where i.Selected == true select i).Count() == 1 && !(Keyboard.IsKeyDown(Key.LeftCtrl) || Keyboard.IsKeyDown(Key.RightCtrl)))
                         {
-                            if ((s as Shape).GetColor().Equals(((((i.Content as StackPanel).Children[0] as System.Windows.Shapes.Rectangle).Fill as SolidColorBrush).Color)))
-                                ColorBox.SelectedItem = i;
+                            foreach (ComboBoxItem i in ColorBox.Items)
+                            {
+                                if ((s as Shape).GetColor().Equals(((((i.Content as StackPanel).Children[0] as System.Windows.Shapes.Rectangle).Fill as SolidColorBrush).Color)))
+                                    ColorBox.SelectedItem = i;
+                            }
+                            SizeSlider.Value = (s as Shape).GetSize();
                         }
-                        SizeSlider.Value = (s as Shape).GetSize();
                     }
                     s.Select();
                     e.Handled = true;
