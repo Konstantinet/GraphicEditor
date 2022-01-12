@@ -18,10 +18,12 @@ namespace GraphSearch
     public partial class MainWindow : Window
     {
         public SerializableStorage<IShape> shapes;
+        private TreeUpdater Updater;
         public MainWindow()
         {
+            shapes = new SerializableStorage<IShape>();
             InitializeComponent();
-            shapes = new SerializableStorage<IShape>();  
+            Updater = new TreeUpdater(HierarhyTree);
         }
         private void Canvas_MouseDown(object sender, MouseButtonEventArgs e)
         {
@@ -66,7 +68,8 @@ namespace GraphSearch
             SizeSlider.Value = shape.GetSize();
             shape.SetColor(((((ColorBox.SelectedItem as ComboBoxItem).Content as StackPanel).Children[0] as System.Windows.Shapes.Rectangle).Fill
                 as SolidColorBrush).Color);
-            shapes.AddElement(shape); 
+            shapes.AddElement(shape);
+            
         }
         private void Window_KeyDown(object sender, KeyEventArgs e)
         {
@@ -114,8 +117,16 @@ namespace GraphSearch
                 {
                     shapes.RemoveElement(d);
                 }
-                if(group.shapes.GetCount() == 0)
-                shapes.AddElement(group);
+
+                if (group.shapes.GetCount() != 0)
+                    shapes.AddElement(group);
+
+                foreach (var s in shapes)
+                {
+                    Updater.UpdateTree( s);
+
+                }
+
             }
             if(e.Key == Key.U)
             {
@@ -228,7 +239,6 @@ namespace GraphSearch
                     }
             }
         }
-
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             var fd = new OpenFileDialog();
@@ -237,5 +247,7 @@ namespace GraphSearch
                 shapes.LoadComponents(new StreamReader(fd.FileName), factory);
             }
         }
+
+       
     }
 }

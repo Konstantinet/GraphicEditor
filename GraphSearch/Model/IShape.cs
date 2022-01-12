@@ -10,6 +10,7 @@ namespace GraphSearch.Model
 {
     public interface IShape
     {
+        string Name { get; }
         bool Selected { get; }
         void Select();
         void Unselect();

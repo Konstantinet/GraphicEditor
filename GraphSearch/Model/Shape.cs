@@ -11,7 +11,9 @@ namespace GraphSearch
         protected double X, Y;
         protected Canvas canvas;
         protected Color Color;
-        public bool selected;
+        bool selected;
+        public string name;
+        public virtual string Name { get { return name; } }
         public bool Selected { get { return selected; } }
         protected System.Windows.Shapes.Shape drawing;
 

@@ -12,11 +12,11 @@ namespace GraphSearch
 {
     class Sqare : Shape
     {
+        private static int Id = 0;
+        override public string Name { get { Id++;return "Sqare" + Id; } }
         public int Height { get; set; }  = 50;
 
-        public Sqare(Canvas canvas, double x, double y) : base(canvas, x, y)
-        {
-        }
+        public Sqare(Canvas canvas, double x, double y) : base(canvas, x, y) => name = "Square";
         public override bool HitTest(double x, double y)
         {
             if ((x < (X + (Height / 2))) && (x > (X - (Height / 2))))

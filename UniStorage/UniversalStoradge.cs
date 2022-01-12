@@ -10,6 +10,7 @@ namespace UniStorage
         private int Size;
         Node<T> First;
         Node<T> Head;
+
         public UniversalStoradge()
         {
             First = Head = null;
@@ -113,5 +114,9 @@ namespace UniStorage
                 current = current.Next;
             }
         }
+
+       
+        
+
     }
 }

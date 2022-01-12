@@ -7,6 +7,8 @@ namespace GraphSearch
 {
     class ShapeGroup : IShape
     {
+        private static int id = 0;
+        public string Name { get { id++;  return "Group"+id; } }
         public UniversalStoradge<IShape> shapes { get; private set; }
         private bool selected;
         public bool Selected { get { return selected; } }

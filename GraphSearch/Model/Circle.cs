@@ -9,8 +9,12 @@ namespace GraphSearch
 {
     public class Circle : Shape
     {
-        public Circle(Canvas canvas, double x, double y) : base(canvas, x, y) { }
+        private static int Id = 0;
+        override public string Name { get { Id++; return "Circle" + Id; } }
+        public Circle(Canvas canvas, double x, double y) : base(canvas, x, y) { name = "Circle"; }
         public int Radius { get; set; } = 25;
+
+        
 
         public override bool HitTest(double x, double y)
         {

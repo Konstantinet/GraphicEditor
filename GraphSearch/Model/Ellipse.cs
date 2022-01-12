@@ -11,10 +11,12 @@ namespace GraphSearch
 {
     class Ellipse:Shape
     {
+        private static int Id = 0;
+        override public string Name { get { Id++; return "Ellipse" + Id; } }
         public int XRadius { get; set; } = 30;
         public int YRadius { get; set; } = 20;
 
-        public Ellipse(Canvas canvas, double x, double y) : base(canvas, x, y) { }
+        public Ellipse(Canvas canvas, double x, double y) : base(canvas, x, y) { name = "Ellipse"; }
         public override bool HitTest(double x, double y)
         {
             if ((Math.Pow((x - X), 2)/ Math.Pow(XRadius, 2) + Math.Pow((y - Y), 2)/Math.Pow(YRadius,2)) <= 1)

@@ -65,6 +65,7 @@
     <Compile Include="Model\ShapeFactory.cs" />
     <Compile Include="Model\ShapeGroup.cs" />
     <Compile Include="Model\Sqare.cs" />
+    <Compile Include="TreeUpdater.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
